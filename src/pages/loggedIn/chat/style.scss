@@ -1,0 +1,44 @@
+.chat {
+  display: flex;
+  .userlist {
+    width: 20%;
+    border: 1px solid black;
+    height: 500px;
+  }
+
+  .chatlist__container {
+    width: 80%;
+    height:500px;
+
+    .chatlist {
+      width: 100%;
+      border: 1px solid black;
+      height: 90%;
+      overflow-y: scroll;
+      .row {
+        display: flex;
+        align-items: center;
+        span {
+          margin-right: 10px;
+        }
+      }
+    } 
+    .row2 {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 20%;
+      .column {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        input {
+          width: 90%;
+          height: 100%;
+        }
+  
+      }
+    }
+
+  }
+}

@@ -1,26 +1,66 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, useHistory } from 'react-router-dom'
+
+import LoggedInRoute from './routes/LoggedInRoute'
+import LoggedOutRoute from './routes/LoggedOutRoute'
+import axios from 'axios'
+import { endpoint } from './consts/consts'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [userId, setUserId] = useState('')
+  const history = useHistory()
+  useEffect(() => {
+    checkLoggedIn()
+  }, [])
+
+  const login = () => {
+    setIsLoggedIn(true)
+    history.push('/')
+  }
+
+  const logout = async () => {
+    try {
+      const response = await axios.get(`${endpoint}/api/account/signout`, { withCredentials: true })
+      const data = response.data
+      if (data) {
+        setIsLoggedIn(false)
+        history.push('/')
+
+      } else {
+        alert('fail to logout')
+      }
+    } catch (err) {
+      alert('fail to logout')
+    }
+
+  }
+
+  const checkLoggedIn = async () => {
+    try {
+      const response = await axios.get(`${endpoint}/api/account/status`, { withCredentials: true })
+      const data = response.data
+      console.log(data)
+      if (data) {
+        setUserId(data)
+        setIsLoggedIn(true)
+      } else {
+        setIsLoggedIn(false)
+      }
+    } catch (err) {
+      console.log(err.message)
+      setIsLoggedIn(false)
+    }
+
+  }
+
+  if (isLoggedIn) {
+    return <LoggedInRoute logout={logout} userId={userId} />
+  } else {
+    return <LoggedOutRoute setUserId={setUserId} login={login} />
+  }
+
 }
 
 export default App;
