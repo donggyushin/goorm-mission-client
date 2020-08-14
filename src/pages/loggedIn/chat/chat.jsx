@@ -3,9 +3,10 @@ import './style.scss'
 import React, { useEffect, useState } from 'react'
 
 import io from 'socket.io-client';
+import { socket_endpoint } from '../../../consts/consts'
 
 const ChatPage = ({ userId }) => {
-  const socket = io('http://localhost:3033');
+  const socket = io(socket_endpoint);
 
   const [currentUsers, setCurrentUsers] = useState([])
   const [message, setMessage] = useState('')
