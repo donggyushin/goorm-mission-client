@@ -2,15 +2,17 @@ import "./message.scss";
 
 import React from "react";
 
-const MessageComponent = () => {
+const MessageComponent = ({ message }) => {
   return (
     <div className={"message"}>
-      <span className={"name"}>donggyu</span>
-      <p className={"message__bubble"}>
-        hihihihihi. aslkdjlaksdjlksajdlk.
-        aklsdjsalkdjlkasjdlkjasdlkjasldkjaslkdjlaskjdlkasjdlkasjdlkajdlkjasd
-        hihihihihi. aslkdjlaksdjlksajdlk.
-        aklsdjsalkdjlkasjdlkjasdlkjasldkjaslkdjlaskjdlkasjdlkasjdlkajdlkjasd
+      <span className={"name"}>{message.from}</span>
+      <p
+        style={
+          message.type === "private" ? { background: "#ffbe0b" } : undefined
+        }
+        className={"message__bubble"}
+      >
+        {message.message}
       </p>
     </div>
   );
