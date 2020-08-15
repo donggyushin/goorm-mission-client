@@ -24,8 +24,6 @@ const ChatPage = ({ userId }) => {
   };
 
   const postMessage = () => {
-    console.log("post message");
-    console.log(message);
     if (message.length === 0) return;
     if (selectedUser) {
       const messageOb = {
@@ -67,8 +65,10 @@ const ChatPage = ({ userId }) => {
   };
 
   const enterKeyPressed = (e) => {
+    e.Handled = true;
     if (e.key === "Enter") {
-      // e.preventDefault();
+      console.log("here!");
+      e.preventDefault();
       postMessage();
     }
   };
@@ -108,15 +108,22 @@ const ChatPage = ({ userId }) => {
         <div className="user__list">
           <div className="title">User list.</div>
           <div className="list">
-            {currentUsers.map((user, index) => (
-              <div
-                style={selectedUser === user ? { color: "#ffbe0b" } : undefined}
-                onClick={() => selectUser(user)}
-                key={index}
-              >
-                {user}
-              </div>
-            ))}
+            <div className="my__name">{userId}</div>
+            {currentUsers.map((user, index) => {
+              if (user !== userId) {
+                return (
+                  <div
+                    style={
+                      selectedUser === user ? { color: "#ffbe0b" } : undefined
+                    }
+                    onClick={() => selectUser(user)}
+                    key={index}
+                  >
+                    {user}
+                  </div>
+                );
+              }
+            })}
           </div>
         </div>
         <div id={"chatlist"} className="chatting__container">
@@ -124,7 +131,13 @@ const ChatPage = ({ userId }) => {
             if (message.from === userId) {
               return <MyMessageComponent key={index} message={message} />;
             } else {
-              return <MessageComponent key={index} message={message} />;
+              if (message.type === "public") {
+                return <MessageComponent key={index} message={message} />;
+              } else {
+                if (message.to === userId) {
+                  return <MessageComponent key={index} message={message} />;
+                }
+              }
             }
           })}
         </div>
@@ -141,7 +154,7 @@ const ChatPage = ({ userId }) => {
           <Form.Control
             onChange={handleMessage}
             value={message}
-            onKeyDown={enterKeyPressed}
+            onKeyUp={enterKeyPressed}
           />
         </Form.Group>
 
