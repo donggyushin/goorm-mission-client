@@ -1,3 +1,6 @@
+import "./signupStyles.scss"
+
+import { Button, Form } from 'react-bootstrap'
 import React, { useState } from 'react'
 
 import { Link } from 'react-router-dom'
@@ -39,11 +42,31 @@ const SignUpPage = () => {
 
 
 
-  return <div>
-    <input onChange={handleId} value={id} placeholder={"id"} />
-    <input onChange={handlePw} value={pw} placeholder={"pw"} />
-    <button onClick={signUp}>sign up</button>
-    <Link to={"/"}>go to sign in page</Link>
+  return <div className={'signup__container'}>
+    <div className="input__container">
+      <Form>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>ID</Form.Label>
+          <Form.Control onChange={handleId} value={id} type="email" placeholder="Enter email" />
+          <Form.Text className="text-muted">
+            We'll never share your id with anyone else.
+    </Form.Text>
+        </Form.Group>
+
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control onChange={handlePw} value={pw} type="password" placeholder="Password" />
+        </Form.Group>
+        <Form.Group>
+
+          <Link to={"/"}>go to sign in page</Link>
+        </Form.Group>
+
+        <Button onClick={signUp} variant="primary" type="submit">
+          Sign Up
+  </Button>
+      </Form>
+    </div>
   </div>
 }
 

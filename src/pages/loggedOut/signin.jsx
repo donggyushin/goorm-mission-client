@@ -1,3 +1,6 @@
+import "./signinStyles.scss"
+
+import { Button, Form } from 'react-bootstrap'
 import React, { useState } from 'react'
 
 import { Link } from 'react-router-dom'
@@ -38,11 +41,33 @@ const SignInPage = ({ login, setUserId }) => {
     }
   }
 
-  return <div>
-    <input onChange={handleId} value={id} placeholder={"id"} />
-    <input onChange={handlePw} value={pw} placeholder={"pw"} />
-    <button onClick={signIn}>submit</button>
-    <Link to={"signup"}>go to sign up page</Link>
+  return <div className="signin__container">
+    <div className="input__container">
+      <Form>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>ID</Form.Label>
+          <Form.Control onChange={handleId} value={id} type="email" placeholder="Enter email" />
+          <Form.Text className="text-muted">
+            We'll never share your id with anyone else.
+    </Form.Text>
+        </Form.Group>
+
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control onChange={handlePw} value={pw} type="password" placeholder="Password" />
+        </Form.Group>
+        <Form.Group>
+
+          <Link to={"signup"}>Don't you have an account yet?</Link>
+        </Form.Group>
+
+        <Button onClick={signIn} variant="primary" type="submit">
+          Sign In
+  </Button>
+      </Form>
+    </div>
+
+
   </div>
 }
 

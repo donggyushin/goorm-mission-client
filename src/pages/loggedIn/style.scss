@@ -2,6 +2,36 @@
   display: flex;
   flex-direction: column;
 
+  .file__list__container {
+    display: flex;
+    height: 579px;
+    .file__list {
+      width: 277px;
+      border-right: 1px solid rgb(206, 212, 218);
+      overflow: scroll;
+      border-bottom: 1px solid rgb(206, 212, 218);
+    }
+
+    .text__edit__container {
+      width: 90%;
+      .selected__file__name {
+        background: rgb(234, 236, 239);
+        padding: 7px;
+        min-height: 38px;
+        border-top-right-radius: 4px;
+      }
+      .selected__file__edit__container {
+      }
+    }
+  }
+
+  .submit__button__container {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10px;
+    margin-bottom: 50px;
+  }
+
   .column {
     display: flex;
     width: 100%;
@@ -11,7 +41,7 @@
       height: 100%;
       min-height: 500px;
     }
-  
+
     .column2 {
       width: 60%;
       border: 1px solid black;
@@ -24,12 +54,10 @@
         height: 10%;
       }
     }
-  
+
     .column3 {
       width: 20%;
       border: 1px solid black;
     }
   }
-
-  
 }
