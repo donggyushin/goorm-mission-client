@@ -9,7 +9,7 @@ import io from "socket.io-client";
 import { socket_endpoint } from "../../../consts/consts";
 
 const ChatPage = ({ userId }) => {
-  const socket = io(socket_endpoint, { transports: ["websocket"] });
+  const socket = io(socket_endpoint);
 
   const [currentUsers, setCurrentUsers] = useState([]);
   const [message, setMessage] = useState("");
