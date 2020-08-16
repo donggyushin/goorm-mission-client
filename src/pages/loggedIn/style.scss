@@ -6,7 +6,7 @@
     display: flex;
     height: 579px;
     .file__list {
-      width: 277px;
+      min-width: 277px;
       border-right: 1px solid rgb(206, 212, 218);
       overflow: scroll;
       border-bottom: 1px solid rgb(206, 212, 218);

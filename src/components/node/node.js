@@ -46,12 +46,16 @@ const NodeComponent = ({
 
   return (
     <div className={"node__container"}>
-      <span style={{ marginRight: "7px" }}>
-        {node.type === "file" && <AiOutlineFile />}
-        {node.type === "directory" && selected === false && <AiTwotoneFolder />}
-        {node.type === "directory" && selected && <AiTwotoneFolderOpen />}
-      </span>
-      <span onClick={fileClicked}>{node.name}</span>
+      <div style={{ display: "flex", marginRight: "50px" }}>
+        <span style={{ marginRight: "5px" }}>
+          {node.type === "file" && <AiOutlineFile />}
+          {node.type === "directory" && selected === false && (
+            <AiTwotoneFolder />
+          )}
+          {node.type === "directory" && selected && <AiTwotoneFolderOpen />}
+        </span>
+        <span onClick={fileClicked}>{node.name}</span>
+      </div>
       {node.children && (
         <ul className={selected ? undefined : "hidden"}>
           {node.children.map((child, index) => {
