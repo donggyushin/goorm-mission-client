@@ -92,6 +92,11 @@ const ChatPage = ({ userId }) => {
       setCurrentUsers(data);
     });
     socket.on("disconnect", (data) => {
+      console.log(data);
+      if (data === "transport close") {
+        alert("서버와의 연결이 끊켰습니다. ");
+        return (window.location.href = "/");
+      }
       setCurrentUsers(data);
     });
     socket.on("chat", (data) => {
