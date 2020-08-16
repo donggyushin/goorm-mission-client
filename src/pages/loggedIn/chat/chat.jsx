@@ -8,9 +8,16 @@ import MyMessageComponent from "../../../components/message/MyMessageComponent";
 import io from "socket.io-client";
 import { socket_endpoint } from "../../../consts/consts";
 
-const ChatPage = ({ userId }) => {
-  const socket = io(socket_endpoint);
+const connectionOptions = {
+  "force new connection": true,
+  reconnectionAttempts: "Infinity", //avoid having user reconnect manually in order to prevent dead clients after a server restart
+  timeout: 10000, //before connect_error and connect_timeout are emitted.
+  transports: ["websocket"],
+};
 
+const socket = io(socket_endpoint, connectionOptions);
+
+const ChatPage = ({ userId }) => {
   const [currentUsers, setCurrentUsers] = useState([]);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
