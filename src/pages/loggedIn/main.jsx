@@ -118,7 +118,6 @@ const Main = ({ logout }) => {
         <div className="file__list">
           <ul>
             {data.map((node, index) => {
-              if (index === 0) return;
               return (
                 <NodeComponent
                   handleSetSelectedFilePath={handleSetSelectedFilePath}
