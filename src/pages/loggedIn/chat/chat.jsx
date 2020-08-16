@@ -15,7 +15,7 @@ const connectionOptions = {
   transports: ["websocket"],
 };
 
-const socket = io(socket_endpoint, connectionOptions);
+const socket = io(socket_endpoint);
 
 const ChatPage = ({ userId }) => {
   const [currentUsers, setCurrentUsers] = useState([]);
